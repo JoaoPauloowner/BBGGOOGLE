@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Google AI Studio App</title>
+    <script>
+      // Robust workaround for deep third-party polyfills (like formdata-polyfill) trying to overwrite window.fetch
+      // in environments (like sandboxed preview iframes) where window.fetch might be read-only or getter-only.
+      (function() {
+        try {
+          var currentFetch = window.fetch;
+          var patch = {
+            get: function() {
+              return currentFetch;
+            },
+            set: function(value) {
+              currentFetch = value;
+            },
+            configurable: true,
+            enumerable: true
+          };
+          
+          Object.defineProperty(window, 'fetch', patch);
+          
+          if (typeof globalThis !== 'undefined' && globalThis !== window) {
+            Object.defineProperty(globalThis, 'fetch', patch);
+          }
+        } catch (e) {
+          console.warn("Unable to patch fetch getter/setter:", e);
+          // Fallback: try to write it directly if we can
+          try {
+            window.fetch = window.fetch;
+          } catch (err) {}
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

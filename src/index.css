@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@900&family=Crimson+Pro:ital,wght@1,300;1,400;1,600&family=DM+Sans:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-barlow: "Barlow Condensed", sans-serif;
+  --font-crimson: "Crimson Pro", serif;
+  --font-dmsans: "DM Sans", sans-serif;
+
+  --color-bg-base: #06090f;
+  --color-bg-deep: #090e1a;
+  --color-bg-deeper: #0c1120;
+  
+  --color-primary-orange: #f97316;
+  --color-secondary-blue: #4d9fff;
+
+  @keyframes spin-cw {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @keyframes spin-ccw {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(0deg); }
+    100% { transform: rotate(-360deg); }
+  }
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+  }
+
+  --animate-spin-cw: spin-cw 25s linear infinite;
+  --animate-spin-cw-fast: spin-cw 12s linear infinite;
+  --animate-spin-ccw: spin-ccw 20s linear infinite;
+  --animate-spin-ccw-fast: spin-ccw 10s linear infinite;
+  --animate-pulse-glow: pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Custom utilities */
+.clip-path-angular {
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+}
+
+.clip-path-angular-sm {
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+}
+
+/* Scroll Reveal classes */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Custom scrollbar to keep it premium */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #06090f;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f97316;
+}
+
